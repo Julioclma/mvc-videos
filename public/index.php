@@ -30,7 +30,11 @@ if($pathInfo === '/'){
 
 if(strpos($pathInfo, 'login')){
     $repository = new UsuarioRepository($pdo);
+   
+}
 
+if(strpos($pathInfo, 'logout')){
+$repository = new UsuarioRepository($pdo);
 }
 
 $routes = require_once __DIR__ . "/../config/routes.php";

@@ -36,4 +36,10 @@ class UsuarioRepository
 
        return password_verify($_POST['password'], $data['password']);
     }
+
+    public function logout() : bool
+    {
+       $_SESSION['logado'] = false;
+        return true;
+    }
 }

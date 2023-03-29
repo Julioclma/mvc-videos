@@ -3,7 +3,7 @@
 
     <main class="container">
 
-        <form class="container__formulario" method="post" action="/login">
+        <form class="container__formulario" method="post">
             <h2 class="formulario__titulo">Efetue login</h3>
                 <div class="formulario__campo">
                     <label class="campo__etiqueta" for="email">Email</label>
