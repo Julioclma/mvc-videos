@@ -12,3 +12,17 @@ certifique-se de criar a base de dados e com os parametros de senha e usuário
 Comando para definir a pasta public como principal
 
 php -S localhost:8080 -t public/
+
+
+
+
+/* CRIAR TABELAS, EXTENSÃO MYSQL PDO */
+
+
+--  TBL USERS
+CREATE TABLE users(
+id INTEGER AUTO_INCREMENT,
+email VARCHAR(100) NOT NULL,
+password VARCHAR(100) NOT NULL,
+PRIMARY KEY(id)
+)

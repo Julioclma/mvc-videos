@@ -2,7 +2,7 @@
 
 namespace Alura\Mvc\Controller;
 
-class VideoEnviarController
+class VideoEnviarController implements Controller
 {
     public function __construct()
     {

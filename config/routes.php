@@ -1,5 +1,7 @@
 <?php
 
+use Alura\Mvc\Controller\LoginController;
+use Alura\Mvc\Controller\LoginViewController;
 use Alura\Mvc\Controller\VideoAddController;
 use Alura\Mvc\Controller\VideoById;
 use Alura\Mvc\Controller\VideoEnviarController;
@@ -13,5 +15,9 @@ return [
     'GET|/enviar-video' => VideoEnviarController::class,
     'POST|/editar-video' => VideoUpdateController::class,
     'GET|/editar-video' => VideoById::class,
-    'GET|/remover-video' => VideoExcluiController::class
+    'GET|/remover-video' => VideoExcluiController::class,
+    'GET|/login' => LoginViewController::class,
+    'POST|/login' => LoginController::class
+
+
 ];  

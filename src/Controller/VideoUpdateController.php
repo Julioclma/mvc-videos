@@ -11,12 +11,12 @@ class VideoUpdateController implements Controller
     {
     }
 
-    public function processaRequisicao() : void
+    public function processaRequisicao(): void
     {
 
         $video = new Video($_POST['url'], $_POST['titulo']);
         $video->setId($_POST['id']);
-        
+
         $check = $this->videoRepository->update($video);
 
         if (!$check) {
@@ -25,5 +25,4 @@ class VideoUpdateController implements Controller
             header('Location: /?sucess=1');
         }
     }
-
 }
