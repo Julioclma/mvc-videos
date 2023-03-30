@@ -18,28 +18,33 @@ class UsuarioRepository
         $valid = filter_var($usuario->getEmail(), FILTER_VALIDATE_EMAIL);
 
         if (!$valid) {
-            header('Location: /?valid=0');
-            exit();
+            return false;
         }
 
         $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
 
         $stmt->bindValue(':email', $usuario->getEmail());
 
-        $stmt->execute();
+        $check =  $stmt->execute();
 
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if (!$data) {
+        if (!$data || !$check) {
             return false;
-        }    
+        }
 
-       return password_verify($_POST['password'], $data['password']);
+        return password_verify($_POST['password'], $data['password']);
     }
 
-    public function logout() : bool
+    public function logout(): bool
     {
-       $_SESSION['logado'] = false;
+        session_start();
+
+        if (array_key_exists('logado', $_SESSION)) {
+            session_destroy();
+            return true;
+        }
+
         return true;
     }
 }

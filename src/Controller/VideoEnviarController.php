@@ -14,10 +14,11 @@ class VideoEnviarController implements Controller, verifyLogged
     }
     public function verifyLogged() : void
     {
-        if($_SESSION['logado'] === false)
-        {
-            header('Location: /login?message=você deve se logar no sistema');
-            exit();
-        }
+        session_start();
+if(!array_key_exists('logado', $_SESSION)){
+    header('Location: /login?message=você deve se logar no sistema');
+    exit();
+};
+
     }
 }
