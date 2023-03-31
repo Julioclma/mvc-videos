@@ -9,10 +9,13 @@ class Video
 
     public readonly string $url;
     public readonly int $id;
+    public string $image;
     
-    public function __construct(string $url, public readonly string $title)
+    public function __construct(string $url, public readonly string $title, string $image)
     {
-        $this->setUrl($url);;
+        $this->setUrl($url);
+        $this->image = $image;
+
     }
 
     private function setUrl($url)
@@ -31,4 +34,5 @@ class Video
     {
         $this->id = $id;
     }
+    
 }

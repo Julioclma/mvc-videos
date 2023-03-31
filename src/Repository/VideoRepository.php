@@ -18,18 +18,24 @@ class VideoRepository
 
         $url =  $video->url;
         $titulo = $video->title;
+        $image = $video->image;
 
-        if (!$titulo || !$url) {
+       
+        if (!$titulo || !$url || !$image) {
             header('Location: /?sucess=0');
             exit();
         }
 
-        $sql = ("INSERT INTO videos (url, title) VALUES (?, ?)");
+      
+
+        $sql = ("INSERT INTO videos (url, title, image_path) VALUES (?, ?, ?)");
 
         $stmt = $this->pdo->prepare($sql);
 
         $stmt->bindValue(1, $video->url);
         $stmt->bindValue(2, $video->title);
+        $stmt->bindValue(3, $video->image);
+
 
         $response = $stmt->execute();
 
@@ -71,9 +77,17 @@ class VideoRepository
 
         return array_map(
             function (array $videoData) {
-                $video = new Video($videoData['url'], $videoData['title']);
-                $video->setId($videoData['id']);
+                if($videoData['image_path']){
+                    $video = new Video($videoData['url'], $videoData['title'], $videoData['image_path']);
+                }
 
+                if(!$videoData['image_path'])
+                {
+                    $video = new Video($videoData['url'], $videoData['title'], "invalid");
+                }
+                
+                
+                $video->setId($videoData['id']);
                 return $video;
             },
             $videoList

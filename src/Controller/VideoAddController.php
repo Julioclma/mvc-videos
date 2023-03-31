@@ -13,7 +13,8 @@ class VideoAddController implements Controller
     }
     public function processaRequisicao() : void
     {
-        $check = $this->videoRepository->add(new Video($_POST['url'], $_POST['titulo']));
+        $check = $this->videoRepository->add(new Video($_POST['url'], $_POST['titulo'], $_POST['image']));
+     
         if(!$check){
             header('Location: /?sucess=0');
             exit();

@@ -22,12 +22,11 @@ class LoginController implements Controller
         $result =  $this->repository->login(new Usuario($_POST['email'], $_POST['password']));
 
         if ($result) {
-            session_start();
             $_SESSION['logado'] = true;
             header('Location: /?message=logado com sucesso');
             exit();
-        }
+        }   
 
         header('Location: /login?sucess=0');
-    }
+    }    
 }

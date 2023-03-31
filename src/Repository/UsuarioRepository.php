@@ -38,13 +38,12 @@ class UsuarioRepository
 
     public function logout(): bool
     {
-        session_start();
 
         if (array_key_exists('logado', $_SESSION)) {
             session_destroy();
             return true;
         }
 
-        return true;
+        return false;
     }
 }
