@@ -14,19 +14,21 @@ class VideoRepository
 
     public function add(Video $video): bool
     {
+
         $url = filter_var('url', FILTER_VALIDATE_URL);
 
         $url =  $video->url;
         $titulo = $video->title;
-        $image = $video->image;
 
-       
-        if (!$titulo || !$url || !$image) {
+        $image = $video->getImage();
+
+
+        if (!$titulo || !$url) {
             header('Location: /?sucess=0');
             exit();
         }
 
-      
+
 
         $sql = ("INSERT INTO videos (url, title, image_path) VALUES (?, ?, ?)");
 
@@ -34,7 +36,7 @@ class VideoRepository
 
         $stmt->bindValue(1, $video->url);
         $stmt->bindValue(2, $video->title);
-        $stmt->bindValue(3, $video->image);
+        $stmt->bindValue(3, $video->getImage());
 
 
         $response = $stmt->execute();
@@ -58,7 +60,17 @@ class VideoRepository
 
     public function update(Video $video): bool
     {
-        $stmt = $this->pdo->prepare("UPDATE videos set url = :url, title = :title WHERE id = :id");
+
+
+        if ($video->getImage() === null) {
+            $stmt = $this->pdo->prepare("UPDATE videos set url = :url, title = :title WHERE id = :id");
+        }
+
+        if ($video->getImage()) {
+            $stmt = $this->pdo->prepare("UPDATE videos set url = :url, title = :title, image_path = :image_path WHERE id = :id");
+            $stmt->bindValue(':image_path', $video->getImage());
+        }
+
 
         $stmt->bindValue(':url', $video->url);
 
@@ -77,17 +89,16 @@ class VideoRepository
 
         return array_map(
             function (array $videoData) {
-                if($videoData['image_path']){
+                if ($videoData['image_path']) {
                     $video = new Video($videoData['url'], $videoData['title'], $videoData['image_path']);
                 }
 
-                if(!$videoData['image_path'])
-                {
+                if (!$videoData['image_path']) {
                     $video = new Video($videoData['url'], $videoData['title'], "invalid");
                 }
-                
-                
+
                 $video->setId($videoData['id']);
+
                 return $video;
             },
             $videoList
@@ -109,11 +120,10 @@ class VideoRepository
 
         $exist = $stmt->execute();
 
-        if($exist){
+        if ($exist) {
             return $video = $stmt->fetch(\PDO::FETCH_ASSOC);
         }
 
         return false;
-
     }
 }

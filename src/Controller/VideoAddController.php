@@ -9,13 +9,13 @@ class VideoAddController implements Controller
 {
     public function __construct(private VideoRepository $videoRepository)
     {
-       
     }
-    public function processaRequisicao() : void
+    public function processaRequisicao(): void
     {
-        $check = $this->videoRepository->add(new Video($_POST['url'], $_POST['titulo'], $_POST['image']));
-     
-        if(!$check){
+
+        $check = $this->videoRepository->add(new Video($_POST['url'], $_POST['titulo'], $_FILES));
+
+        if (!$check) {
             header('Location: /?sucess=0');
             exit();
         }
@@ -23,6 +23,4 @@ class VideoAddController implements Controller
         header('Location: /?sucess=1');
         exit();
     }
-
-
 }

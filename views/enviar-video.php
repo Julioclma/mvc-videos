@@ -2,7 +2,7 @@
 
 <main class="container">
 
-    <form class="container__formulario" action="/enviar-video" method="post">
+    <form class="container__formulario" action="/enviar-video" enctype="multipart/form-data" method="post">
         <h2 class="formulario__titulo">Envie um vídeo!</h3>
             <div class="formulario__campo">
                 <label class="campo__etiqueta" for="url">Link embed</label>
@@ -17,10 +17,10 @@
 
             <div class="formulario__campo">
                 <label class="campo__etiqueta" for="image">Selecione uma imagem de Capa</label>
-                <input  type="file" name="image" class="campo__escrita" required placeholder="Neste campo, dê o nome do vídeo" id='image' />
+                <input accept="image/*" type="file" name="image" class="campo__escrita"  id='image'/>
             </div>
 
-            <input class="formulario__botao" type="submit" value="Enviar" />
+            <input class="formulario__botao" type="submit" value="Enviar"/>
     </form>
 
 </main>

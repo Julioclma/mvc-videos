@@ -13,8 +13,7 @@ class VideoUpdateController implements Controller
 
     public function processaRequisicao(): void
     {
-
-        $video = new Video($_POST['url'], $_POST['titulo']);
+        $video = new Video($_POST['url'], $_POST['titulo'], $_FILES);
         $video->setId($_POST['id']);
 
         $check = $this->videoRepository->update($video);
