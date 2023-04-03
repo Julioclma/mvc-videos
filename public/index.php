@@ -20,6 +20,7 @@ $httpMethod = $_SERVER['REQUEST_METHOD'];
 
 
 session_start();
+session_regenerate_id();
 
 
 //Verifica se não está na rota de login, se não estiver e não existir a SESSION 'logado', o usuário é redirecionado para o login
