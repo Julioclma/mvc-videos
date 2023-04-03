@@ -3,6 +3,7 @@
 use Alura\Mvc\Controller\LoginController;
 use Alura\Mvc\Controller\LoginViewController;
 use Alura\Mvc\Controller\LogoutController;
+use Alura\Mvc\Controller\RemoverCapaController;
 use Alura\Mvc\Controller\VideoAddController;
 use Alura\Mvc\Controller\VideoById;
 use Alura\Mvc\Controller\VideoEnviarController;
@@ -19,5 +20,6 @@ return [
     'GET|/remover-video' => VideoExcluiController::class,
     'GET|/login' => LoginViewController::class,
     'POST|/login' => LoginController::class,
-    'GET|/logout' => LogoutController::class
+    'GET|/logout' => LogoutController::class,
+    'GET|/remover-capa' => RemoverCapaController::class
 ];  

@@ -126,4 +126,15 @@ class VideoRepository
 
         return false;
     }
+
+    public function removerCapa(int $id): bool
+    {
+        $stmt = $this->pdo->prepare("UPDATE videos set image_path = null WHERE id = :id");
+
+        $stmt->bindValue(':id', $id);
+
+        $result = $stmt->execute();
+
+        return $result;
+    }
 }

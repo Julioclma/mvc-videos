@@ -16,7 +16,7 @@
             </div>
 
             <div class="formulario__campo">
-                <label class="campo__etiqueta" for="image">Selecione uma imagem de Capa <?php var_dump($video['image_path']);?></label>
+                <label class="campo__etiqueta" for="image">Selecione uma imagem de Capa</label>
                 <input accept="image/*" type="file" name="image" class="campo__escrita" id='image'/>
             </div>
 

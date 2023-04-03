@@ -34,8 +34,7 @@ class Video
 
         if (is_array($image)) {
 
-            if($image['image']['error'] === 4){
-        
+            if($image['image']['error'] === UPLOAD_ERR_NO_FILE){
                 $this->image = null;
                 return;
             }
@@ -43,8 +42,8 @@ class Video
             if ($image['image']['error'] === UPLOAD_ERR_OK); {
                 move_uploaded_file($image['image']['tmp_name'], __DIR__ . '/../../public/img/uploads' . $image['image']['name']);
 
-                $this->image = $image['image']['name'];
-
+                $this->image = 'uploads'.$image['image']['name'];
+                
                 return;
             }
         }

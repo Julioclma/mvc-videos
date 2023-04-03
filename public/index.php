@@ -21,6 +21,7 @@ $httpMethod = $_SERVER['REQUEST_METHOD'];
 
 session_start();
 
+
 //Verifica se não está na rota de login, se não estiver e não existir a SESSION 'logado', o usuário é redirecionado para o login
 if (!strpos($pathInfo, 'login') && !array_key_exists('logado', $_SESSION)) {
     header('Location: /login');
@@ -37,7 +38,7 @@ if(strpos($pathInfo, 'login') && $httpMethod === 'POST'){
 
 }
 
-if ($pathInfo === '/' || strpos($pathInfo, 'video')) {
+if ($pathInfo === '/' || strpos($pathInfo, 'video') || strpos($pathInfo, 'capa')) {
     $repository = new VideoRepository($pdo);
 }
 
@@ -45,11 +46,14 @@ if (strpos($pathInfo, 'logout')) {
     $repository = new UsuarioRepository($pdo);
 }
 
+
 $routes = require_once __DIR__ . "/../config/routes.php";
 
 $controllerClass = $routes["$httpMethod|$pathInfo"];
 
 $controller = new $controllerClass($repository);
+
+
 
 //Interface que processa todas as requisições
 $controller->processaRequisicao();
