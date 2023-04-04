@@ -1,5 +1,7 @@
 <?php
 
+use Alura\Mvc\Controller\ApiPostVideosController;
+use Alura\Mvc\Controller\JsonVideos;
 use Alura\Mvc\Controller\LoginController;
 use Alura\Mvc\Controller\LoginViewController;
 use Alura\Mvc\Controller\LogoutController;
@@ -21,5 +23,7 @@ return [
     'GET|/login' => LoginViewController::class,
     'POST|/login' => LoginController::class,
     'GET|/logout' => LogoutController::class,
-    'GET|/remover-capa' => RemoverCapaController::class
+    'GET|/remover-capa' => RemoverCapaController::class,
+    'GET|/videos-api' => JsonVideos::class,
+    'POST|/videos-api' => ApiPostVideosController::class
 ];  
